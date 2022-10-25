@@ -36,8 +36,8 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-      //this.username = this.globalService.getUser();
-      //this.menuList = this.globalService.getMenu();
+      this.username = this.globalService.getUser();
+      this.menuList = this.globalService.getMenu();
   }
 
   ngAfterViewInit() {
@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   logout() {
-      //this.globalService.clearSession();
+      this.globalService.clearSession();
       this.router.navigate(['login']);
 
       // se remueven los permisos del servicio de usuario

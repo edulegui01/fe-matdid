@@ -6,6 +6,7 @@ import { Settings } from 'src/app/class/settings';
 import { LoginService } from './services/login.service';
 //import { GlobalService } from 'src/app/global-service/global.service';
 import { GlobalMessage } from 'src/app/class/global-message';
+import { GlobalService } from '../global-service/global.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent {
       private formBuilder: FormBuilder,
       private snackBar: MatSnackBar,
       private loginService: LoginService,
-      //private globalService: GlobalService,
+      private globalService: GlobalService,
   ) {
       this.createLoginForm();
   }
@@ -56,7 +57,7 @@ export class LoginComponent {
       };
 
       this.loginService.login(userData.alias, userData.clave).subscribe(result => {
-          //this.globalService.setSession(result);
+          this.globalService.setSession(result);
           this.snackBar.open('BIENVENIDO/A ' + result.alias, 'OK',
               { duration: Settings.LONG_TIME, panelClass: Settings.LOGIN_SUCCES_MESSAGE_CLASS });
           this.router.navigate(['']); // redirect al home

@@ -10,6 +10,6 @@ export class AppComponent {
   constructor(
     private globalService: GlobalService,
   ) {
-    //this.globalService.initLocalSession();
+    this.globalService.initLocalSession();
   }
 }

@@ -1,39 +1,6 @@
 <mat-accordion class="menu-items" multi='true'>
     
 
-    <div>
-        <a mat-list-item class="menu-link no-child route-link">
-            <span>Menu1</span>
-        </a>
-    </div>
-    <div>
-        <mat-expansion-panel [expanded]="openCascade">
-            <mat-expansion-panel-header>
-                <mat-panel-title class="menu-link no-child route-link">
-                    <span >
-                        Menu2
-                    </span>
-                </mat-panel-title>
-                <mat-panel-description>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-
-                <!-- Si no tiene hijos es un menu final -->
-                <a mat-list-item #link  class="menu-link no-child route-link">
-                    <span>Submenu1</span>
-                </a>
-                <a mat-list-item #link  class="menu-link no-child route-link">
-                    <span>Submenu2</span>
-                </a>
-
-        </mat-expansion-panel>
-    </div>
-
-
-
-
-
-
     <div *ngFor="let menu of menuList">
 
         <!-- Profundidad 1 menu-solid-->
