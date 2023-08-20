@@ -35,4 +35,27 @@ export const MENU_URLS = {
             PERMISO: 'ELIMINAR_HORARIO'
         },
     },
+    CLIENTE: {
+        URL_BASE: 'cliente',
+        ROOT: {
+            URL: 'listar-cliente',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-cliente',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-cliente',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-cliente',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-cliente',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    }
 };

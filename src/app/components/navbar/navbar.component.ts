@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/global-service/global.service';
 import { GlobalMessage } from 'src/app/class/global-message';
 import { SidenavComponent } from '../sidenav/sidenav.component';
+import { menu } from 'src/app/class/menu-items';
+
 
 @Component({
   selector: 'app-navbar',
@@ -37,7 +39,8 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
       this.username = this.globalService.getUser();
-      this.menuList = this.globalService.getMenu();
+      this.menuList = menu.menuList;
+      console.log(this.menuList)
   }
 
   ngAfterViewInit() {

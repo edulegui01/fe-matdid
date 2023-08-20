@@ -1,0 +1,17 @@
+<nav mat-tab-nav-bar updateActiveLink>
+
+    <a mat-tab-link routerLink="listar" routerLinkActive #rl1="routerLinkActive" [active]="rl1.isActive">
+      LISTAR EDIFICIO
+    </a>
+
+    <a mat-tab-link routerLink="nuevo" *ngIf="!edificioService.editForm" routerLinkActive #rl2="routerLinkActive" [active]="rl2.isActive">
+      REGISTRAR EDIFICIO
+    </a>
+
+    <a mat-tab-link routerLink="editar" *ngIf="edificioService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
+      MODIFICAR EDIFICIO
+    </a>
+
+  </nav>
+
+  <router-outlet></router-outlet>

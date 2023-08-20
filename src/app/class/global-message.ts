@@ -6,7 +6,7 @@
  export class GlobalMessage {
 
     static APP_LABELS = {
-        APP_NAME: 'Proyecto Base',
+        APP_NAME: 'MATDID',
         APP_NAME_SMALL: '',
         APP_VERSION: 'Versión: ',
     };

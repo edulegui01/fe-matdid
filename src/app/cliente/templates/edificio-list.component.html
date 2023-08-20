@@ -1,0 +1,207 @@
+<div class="list-page">
+
+    <div class="list-container mat-elevation-z4">
+
+        <app-custom-spinner-loader></app-custom-spinner-loader>
+
+        <mat-table [dataSource]="dataSource" matSort matSortActive="nombre" class="list-table-container"
+            xLayout="column" matSortDisableClear matSortDirection="desc">
+
+            <!--Cabeceras-->
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                    ID
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.id }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                    NOMBRE
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.nombre }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="direccion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                    DIRECCION
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.direccion }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="telefono">
+                <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                    TELEFONO
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.telefono }}
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+                <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                    ESTADO
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span [ngClass]="{ 'active-color': element.estado, 'inactive-color': !element.estado}">
+                        {{ element.estado ? 'ACTIVO' : 'INACTIVO' }}
+                    </span>
+                </mat-cell>
+            </ng-container>
+
+            <!-- filtros de la tabla -->
+            <ng-container matColumnDef="id-filter">
+                <mat-header-cell *matHeaderCellDef>
+                    <div [formGroup]="filterForm">
+                        <mat-form-field appearance="outline" class="filter-input">
+                            <input formControlName="id" matInput placeholder="BUSCAR POR ID"
+                                (keydown.enter)="doFilter()">
+                        </mat-form-field>
+                    </div>
+                </mat-header-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre-filter">
+                <mat-header-cell *matHeaderCellDef>
+                    <div [formGroup]="filterForm">
+                        <mat-form-field appearance="outline" class="filter-input">
+                            <input formControlName="nombre" matInput placeholder="BUSCAR POR NOMBRE"
+                                (keydown.enter)="doFilter()">
+                        </mat-form-field>
+                    </div>
+                </mat-header-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="direccion-filter">
+                <mat-header-cell *matHeaderCellDef>
+                    <div [formGroup]="filterForm">
+                        <mat-form-field appearance="outline" class="filter-input">
+                            <input formControlName="direccion" matInput placeholder="BUSCAR POR DIRECCION"
+                                (keydown.enter)="doFilter()">
+                        </mat-form-field>
+                    </div>
+                </mat-header-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="telefono-filter">
+                <mat-header-cell *matHeaderCellDef>
+                    <div [formGroup]="filterForm">
+                        <mat-form-field appearance="outline" class="filter-input">
+                            <input formControlName="telefono" matInput placeholder="BUSCAR POR TELEFONO"
+                                (keydown.enter)="doFilter()">
+                        </mat-form-field>
+                    </div>
+                </mat-header-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="estado-filter">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>
+                    <div [formGroup]="filterForm">
+                        <mat-form-field appearance="outline" class="filter-input">
+                            <mat-select formControlName="estado" (selectionChange)="doFilter()">
+                                <mat-option *ngFor="let status of statusList" [value]="status.value">
+                                    {{ status.text }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-header-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="opciones-filter">
+                <mat-header-cell mat-header-cell *matHeaderCellDef fxFlex="15%">
+                    <button mat-icon-button color="primary" (click)="doFilter()">
+                        <mat-icon>
+                            search
+                        </mat-icon>
+                    </button>
+                </mat-header-cell>
+            </ng-container>
+
+            <div *ngIf="true">
+                <ng-container matColumnDef="options">
+                    <mat-header-cell *matHeaderCellDef fxFlex="15%">
+
+                        <span class="options-column">
+                            OPCIONES
+                        </span>
+
+                        <button [matMenuTriggerFor]="tableConfig" matTooltip="OPCIONES DE TABLA"
+                            class="config-table-btn-large" mat-flat-button>
+                            OPCIONES
+                        </button>
+
+                        <button mat-icon-button [matMenuTriggerFor]="tableConfig" class="config-table-btn"
+                            matTooltip="OPCIONES DE TABLA">
+                            <mat-icon>
+                                settings
+                            </mat-icon>
+                        </button>
+
+                        <mat-menu #tableConfig="matMenu">
+
+                            <button mat-menu-item (click)="showFilter = !showFilter">
+                                <mat-icon>
+                                    filter_list
+                                </mat-icon>
+                                {{ showFilter ? 'OCULTAR FILTRO' : 'MOSTRAR FILTRO' }}
+                            </button>
+
+                            <button mat-menu-item (click)="smallRowSize = !smallRowSize">
+                                <mat-icon>
+                                    {{ smallRowSize ? 'unfold_more' : 'unfold_less' }}
+                                </mat-icon>
+                                {{ smallRowSize ? 'AGRANDAR FILAS' : 'REDUCIR FILAS' }}
+                            </button>
+
+                        </mat-menu>
+
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element" fxFlex="15%">
+
+                        <button mat-icon-button [matMenuTriggerFor]="actions">
+                            <mat-icon aria-label="actions">
+                                more_horiz
+                            </mat-icon>
+                        </button>
+
+                        <mat-menu #actions>
+                            <button mat-menu-item (click)="edit(element)">
+                                <mat-icon class="mat-18">edit</mat-icon>
+                                EDITAR
+                            </button>
+
+                            <mat-divider></mat-divider>
+
+                            <button mat-menu-item (click)="delete(element)">
+                                <mat-icon class="mat-18">
+                                    delete
+                                </mat-icon>
+                                ELIMINAR
+                            </button>
+                        </mat-menu>
+                    </mat-cell>
+                </ng-container>
+            </div>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+
+            <mat-header-row *matHeaderRowDef="displayedFilters; sticky: true" class="second-header-row"
+                [ngClass]="{'hideFilter': showFilter === false}">
+            </mat-header-row>
+
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'small-row': smallRowSize}"></mat-row>
+
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="paginatorRange" showFirstLastButtons [length]="resultsLength | async">
+        </mat-paginator>
+
+    </div>
+</div>
