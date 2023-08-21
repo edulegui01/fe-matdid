@@ -4,6 +4,7 @@ import { GlobalService } from 'src/app/global-service/global.service';
 import { ServiceBase } from 'src/app/class/serviceAbstract';
 
 
+
 @Injectable({
     providedIn: 'root'
 })

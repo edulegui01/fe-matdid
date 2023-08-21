@@ -8,17 +8,13 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { MenuNavigationComponent } from './components/menu-navigation/menu-navigation.component';
+import { NavigationModule } from './components/navigation.module';
+import { ClienteModule } from './cliente/cliente.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    NavbarComponent,
-    SidenavComponent,
-    MenuNavigationComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +23,9 @@ import { MenuNavigationComponent } from './components/menu-navigation/menu-navig
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NavigationModule,
+    ClienteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

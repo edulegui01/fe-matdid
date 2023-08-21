@@ -1,25 +1,31 @@
 import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
-import { MatTable, MatSort, MatPaginator, MatDialog, MatSnackBar } from '@angular/material';
+
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/global-service/global.service';
 import { MENU_URLS } from 'src/app/components/navbar/routes';
-import { CustomAbstractListComponent } from 'src/app/class/customAbstractListComponent';
 import { EdificioService } from '../services/edificio.service';
 import { GlobalMessage } from 'src/app/class/global-message';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTable } from '@angular/material/table';
+import { CustomAbstractListComponent } from 'src/app/class/customAbstractListComponent';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
-  selector: 'app-edificio-list',
+  selector: 'app-cliente-list',
   templateUrl: '../templates/edificio-list.component.html',
   styleUrls: ['../styles/edificio-list.component.scss']
 })
-export class EdificioListComponent extends CustomAbstractListComponent implements AfterViewInit, OnInit {
+export class ClienteListComponent extends CustomAbstractListComponent implements AfterViewInit, OnInit {
 
   displayedColumns = ['nombre', 'direccion', 'telefono', 'estado', 'options'];
   displayedFilters = ['nombre-filter', 'direccion-filter', 'telefono-filter', 'estado-filter', 'opciones-filter'];
-  @ViewChild(MatTable, { read: false, static: false }) matTable: MatTable<any>;
-  @ViewChild(MatSort, { read: false, static: false }) sort: MatSort;
-  @ViewChild(MatPaginator, { read: false, static: false }) paginator: MatPaginator;
+  @ViewChild(MatTable, { read: false, static: false }) matTable!: MatTable<any>;
+  @ViewChild(MatSort, { read: false, static: false }) sort!: MatSort;
+  @ViewChild(MatPaginator, { read: false, static: false }) paginator!: MatPaginator;
 
   statusList = GlobalMessage.ACCOUNT_STATUS;
 
@@ -31,7 +37,7 @@ export class EdificioListComponent extends CustomAbstractListComponent implement
     private snackbar: MatSnackBar,
     public globalSrv: GlobalService,
   ) {
-    super(MENU_URLS.EDIFICIO);
+    super(MENU_URLS.CLIENTE);
     this.entityService = edificioService;
     this.globalSrvInstance = globalSrv;
     this.routerInstance = router;
@@ -53,7 +59,7 @@ export class EdificioListComponent extends CustomAbstractListComponent implement
     this.defaultSortDirection = 'asc';
 
     //set default url
-    this.defaultUrlList = MENU_URLS.EDIFICIO.URL_BASE;
+    this.defaultUrlList = MENU_URLS.CLIENTE.URL_BASE;
 
   }
 
@@ -65,16 +71,16 @@ export class EdificioListComponent extends CustomAbstractListComponent implement
 
   doFilter() {
     this.prepareFilter({
-      id: this.filterForm.controls.id.value,
-      nombre: this.filterForm.controls.nombre.value.toUpperCase(),
-      direccion: this.filterForm.controls.direccion.value.toUpperCase(),
-      telefono: this.filterForm.controls.telefono.value,
-      estado: this.filterForm.controls.estado.value
+      // id: this.filterForm.controls.id.value,
+      // nombre: this.filterForm.controls.nombre.value.toUpperCase(),
+      // direccion: this.filterForm.controls.direccion.value.toUpperCase(),
+      // telefono: this.filterForm.controls.telefono.value,
+      // estado: this.filterForm.controls.estado.value
     });
   }
 
   delete(element: any) {
-    this.deleteDefaultMessage = element.nombre;
-    this.prepareDelete(element, this.menuOptions.menuUrl);
+    // this.deleteDefaultMessage = element.nombre;
+    // this.prepareDelete(element, this.menuOptions.menuUrl);
   }
 }

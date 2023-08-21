@@ -3,19 +3,18 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { NavigationModule } from '../components/navigation.module';
-import { CustomDialogModule } from '../components/custom-dialog/custom-dialog.module';
-import { EdificioComponent } from './components/edificio.component';
-import { EdificioListComponent } from './components/edificio-list.component';
-import { EdificioFormComponent } from './components/edificio-form.component';
+import { ClienteComponent } from './components/cliente.component';
+import { ClienteFormComponent } from './components/cliente-form.component';
+import { ClienteListComponent } from './components/cliente-list.component';
+
 
 
 @NgModule({
   declarations: [
-    EdificioComponent,
-    EdificioListComponent,
-    EdificioFormComponent
+    ClienteComponent,
+    ClienteFormComponent,
+    ClienteListComponent
   ],
   imports: [
     CommonModule,
@@ -23,9 +22,7 @@ import { EdificioFormComponent } from './components/edificio-form.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
     NavigationModule,
-    CustomDialogModule
   ]
 })
-export class EdificioModule { }
+export class ClienteModule { }
