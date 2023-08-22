@@ -54,7 +54,8 @@ export class MenuNavigationComponent implements OnInit {
   }
 
   goRoute(menu: any, eLink: MatListItem) {
-      this.checked(eLink._getHostElement());
+      //this.checked(eLink._getHostElement());
+      console.log(menu.url)
       const extraParams: NavigationExtras = {
           state: { permisos: menu.permisos },
       };
