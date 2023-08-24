@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cliente-list',
@@ -7,14 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClienteListComponent implements OnInit {
 
-  constructor() { }
+  filterForm!:FormGroup;
+  
+  
+
+  constructor(private frmBuilder: FormBuilder) { 
+    
+
+    this.initFilter({
+      position: [''],
+      name: [''],
+      weight: [''],
+      symbol: [''],
+      
+    });
+  }
 
   ngOnInit(): void {
   }
 
+  initFilter(filterBody: any) {
+    this.filterForm = this.frmBuilder.group(filterBody);
+}
+
   dataSource=ELEMENT_DATA;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-
+  displayedFilters: string[] = ['position-filter', 'name-filter', 'weight-filter', 'symbol-filter'];
+  
 }
 
 export interface PeriodicElement {

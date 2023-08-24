@@ -4,7 +4,7 @@
 
         
 
-       <mat-table [dataSource]="dataSource" class="list-table-container" matSort matSortActive="nombre"  xLayout="column" matSortDisableClear matSortDirection="desc">
+       <mat-table [dataSource]="dataSource" class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
         <ng-container matColumnDef="position">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
                 ID
@@ -41,13 +41,55 @@
             </mat-cell>
         </ng-container>
 
+        <!--filters-->
+        <ng-container matColumnDef="position-filter">
+            <mat-header-cell *matHeaderCellDef>
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="position" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            </mat-header-cell>
+        </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <ng-container matColumnDef="name-filter">
+            <mat-header-cell *matHeaderCellDef>
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="name" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            </mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="weight-filter">
+            <mat-header-cell *matHeaderCellDef>
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="weight" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            </mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="symbol-filter">
+            <mat-header-cell *matHeaderCellDef>
+                <div [formGroup]="filterForm">
+                    <mat-form-field appearance="outline" class="filter-input">
+                        <input formControlName="symbol" matInput placeholder="BUSCAR POR ID">
+                    </mat-form-field>
+                </div>
+            </mat-header-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; "></mat-header-row>
+        <mat-header-row *matHeaderRowDef="displayedFilters; " class="second-header-row"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
         </mat-table>
 
-        <!-- <mat-paginator showFirstLastButtons>
-        </mat-paginator> -->
+         <mat-paginator showFirstLastButtons>
+        </mat-paginator> 
 
     </div>
 </div>
