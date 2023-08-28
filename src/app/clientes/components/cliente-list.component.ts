@@ -1,39 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { CustomAbstractListComponent } from 'src/app/class/customAbstractListComponent';
+import { GlobalMessage } from 'src/app/class/global-message';
+import { MENU_URLS } from 'src/app/components/navbar/routes';
 
 @Component({
   selector: 'app-cliente-list',
   templateUrl: '../templates/cliente-list.component.html',
   styleUrls: ['../styles/cliente-list.component.scss']
 })
-export class ClienteListComponent implements OnInit {
+export class ClienteListComponent extends CustomAbstractListComponent implements OnInit {
 
-  filterForm!:FormGroup;
+ 
   
   
 
-  constructor(private frmBuilder: FormBuilder) { 
-    
+  constructor(private formBuilder: FormBuilder
+    ) { 
+        super(MENU_URLS.CLIENTE);
+        this.frmBuilder = formBuilder;
 
-    this.initFilter({
-      position: [''],
-      name: [''],
-      weight: [''],
-      symbol: [''],
-      
+        this.initFilter({
+          position: [''],
+          name: [''],
+          weight: [''],
+          symbol: [''],
+          
+        });
+  }
+
+
+  doFilter() {
+    this.prepareFilter({
+      // id: this.filterForm.controls.id.value,
+      // nombre: this.filterForm.controls.nombre.value.toUpperCase(),
+      // direccion: this.filterForm.controls.direccion.value.toUpperCase(),
+      // telefono: this.filterForm.controls.telefono.value,
+      // estado: this.filterForm.controls.estado.value
     });
   }
 
-  ngOnInit(): void {
+  delete(element: any) {
+    // this.deleteDefaultMessage = element.nombre;
+    // this.prepareDelete(element, this.menuOptions.menuUrl);
   }
 
-  initFilter(filterBody: any) {
-    this.filterForm = this.frmBuilder.group(filterBody);
-}
-
-  dataSource=ELEMENT_DATA;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedFilters: string[] = ['position-filter', 'name-filter', 'weight-filter', 'symbol-filter'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'options'];
+  displayedFilters: string[] = ['position-filter', 'name-filter', 'weight-filter', 'symbol-filter','opciones-filter'];
   
 }
 

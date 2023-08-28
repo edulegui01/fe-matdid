@@ -9,7 +9,7 @@
      */
 
     // dominio del server donde se encuentran los servicios
-    static URL_BASE = 'http://192.168.2.104:8180/api/manager';
+    static URL_BASE = 'http://localhost:8090/api/matdid';
 
 
     // key de acceso al sistema
