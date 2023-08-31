@@ -1,185 +1,191 @@
-import { CustomTableDataSource } from './customTableDataSource';
-import { Observable, merge } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { GlobalMessage } from './global-message';
-import { MENU_URLS } from '../components/navbar/routes';
-import { ServiceBase } from './serviceAbstract';
-import { Router, NavigationExtras } from '@angular/router';
-import { MatDialog, MatSnackBar, MatTable, MatSort, MatPaginator } from '@angular/material';
-import { GlobalService } from '../global-service/global.service';
-import { tap, first } from 'rxjs/operators';
-import { CustomDialogComponent } from '../components/custom-dialog/components/custom-dialog.component';
-import { Settings } from './settings';
-import { OnDestroy } from '@angular/core';
+// import { CustomTableDataSource } from './customTableDataSource';
+// import { Observable, merge } from 'rxjs';
+// import { FormGroup, FormBuilder } from '@angular/forms';
+// import { GlobalMessage } from './global-message';
+// import { MENU_URLS } from '../components/navbar/routes';
+// import { ServiceBase } from './serviceAbstract';
+// import { Router, NavigationExtras } from '@angular/router';
 
-export abstract class CustomAbstractListComponent implements OnDestroy {
+// import { GlobalService } from '../global-service/global.service';
+// import { tap, first } from 'rxjs/operators';
+// //import { CustomDialogComponent } from '../components/custom-dialog/components/custom-dialog.component';
+// import { Settings } from './settings';
+// import { Injectable, OnDestroy } from '@angular/core';
+// import { MatTable } from '@angular/material/table';
+// import { MatSort } from '@angular/material/sort';
+// import { MatPaginator } from '@angular/material/paginator';
+// import { MatSnackBar } from '@angular/material/snack-bar';
 
-    filters;
-    dataSource: CustomTableDataSource;
-    resultsLength: Observable<number>;
-    filterForm: FormGroup;
 
-    matTableRef: MatTable<any>;
-    sortRef: MatSort;
-    paginatorRef: MatPaginator;
-    showFilter = true;
-    smallRowSize = false;
+// @Injectable()
+// export abstract class CustomAbstractListComponent implements OnDestroy {
 
-    viewText = GlobalMessage.VIEW_LABELS;
-    accountStatus = GlobalMessage.ACCOUNT_STATUS;
-    paginatorRange = GlobalMessage.PAGINATOR_RANGE;
+//     filters;
+//     dataSource: CustomTableDataSource;
+//     resultsLength: Observable<number>;
+//     filterForm: FormGroup;
 
-    deleteDefaultMessage = 'EL REGISTRO';
-    frmBuilder: FormBuilder;
-    entityService: ServiceBase;
-    routerInstance: Router;
-    dialogInstance: MatDialog;
-    snackbarInstance: MatSnackBar;
-    globalSrvInstance: GlobalService;
-    defaultUrlList;
-    defaultPageIndex = 0;
-    defaultPageSize = 10;
-    defaultColumSort = '';
-    defaultSortDirection = '';
-    listObservables = [];
+//     matTableRef: MatTable<any>;
+//     sortRef: MatSort;
+//     paginatorRef: MatPaginator;
+//     showFilter = true;
+//     smallRowSize = false;
 
-    menuOptions = {
-        menuUrl: '',
-        listar: '',
-        editar: '',
-        nuevo: '',
-        eliminar: '',
-        menuDict: ''
-    };
+//     viewText = GlobalMessage.VIEW_LABELS;
+//     accountStatus = GlobalMessage.ACCOUNT_STATUS;
+//     paginatorRange = GlobalMessage.PAGINATOR_RANGE;
 
-    constructor(menuUrl: any) {
-        this.buildMenuPathOptions(menuUrl);
-    }
+//     deleteDefaultMessage = 'EL REGISTRO';
+//     frmBuilder: FormBuilder;
+//     entityService: ServiceBase;
+//     routerInstance: Router;
+//     dialogInstance: MatDialog;
+//     snackbarInstance: MatSnackBar;
+//     globalSrvInstance: GlobalService;
+//     defaultUrlList;
+//     defaultPageIndex = 0;
+//     defaultPageSize = 10;
+//     defaultColumSort = '';
+//     defaultSortDirection = '';
+//     listObservables = [];
 
-    initFilter(filterBody: any) {
-        this.filterForm = this.frmBuilder.group(filterBody);
-    }
+//     menuOptions = {
+//         menuUrl: '',
+//         listar: '',
+//         editar: '',
+//         nuevo: '',
+//         eliminar: '',
+//         menuDict: ''
+//     };
 
-    ngOnDestroy(): void {
-        this.listObservables.forEach(elm => {
-            elm.unsubscribe();
-        });
-    }
+//     constructor(menuUrl: any) {
+//         this.buildMenuPathOptions(menuUrl);
+//     }
 
-    ngOnInit() {
-        this.dataSource = new CustomTableDataSource(this.entityService);
-        this.dataSource.loadData(
-            this.defaultUrlList ? this.defaultUrlList : this.globalSrvInstance.changeDashToBackSlash(this.menuOptions.menuUrl),
-            this.defaultPageIndex,
-            this.defaultPageSize,
-            this.defaultColumSort,
-            this.defaultSortDirection
-        );
-        this.resultsLength = this.dataSource.getPageCount();
-    }
+//     initFilter(filterBody: any) {
+//         this.filterForm = this.frmBuilder.group(filterBody);
+//     }
 
-    doAfterViewInit(): void {
-        if (this.sortRef && this.paginatorRef) {
-            this.listObservables.push(this.sortRef.sortChange.subscribe(() => this.paginatorRef.pageIndex = 0));
-            this.listObservables.push(merge(this.sortRef.sortChange, this.paginatorRef.page)
-                .pipe(
-                    tap(
-                        () => this.loadEntityDataSource()
-                    )
-                ).subscribe());
-        }
+//     ngOnDestroy(): void {
+//         this.listObservables.forEach(elm => {
+//             elm.unsubscribe();
+//         });
+//     }
 
-    }
+//     ngOnInit() {
+//         this.dataSource = new CustomTableDataSource(this.entityService);
+//         this.dataSource.loadData(
+//             this.defaultUrlList ? this.defaultUrlList : this.globalSrvInstance.changeDashToBackSlash(this.menuOptions.menuUrl),
+//             this.defaultPageIndex,
+//             this.defaultPageSize,
+//             this.defaultColumSort,
+//             this.defaultSortDirection
+//         );
+//         this.resultsLength = this.dataSource.getPageCount();
+//     }
 
-    loadEntityDataSource() {
-        this.dataSource.loadData(
-            this.defaultUrlList ? this.defaultUrlList : this.globalSrvInstance.changeDashToBackSlash(this.menuOptions.menuUrl),
-            this.paginatorRef.pageIndex,
-            this.paginatorRef.pageSize,
-            this.sortRef.active,
-            this.sortRef.direction,
-            this.filters);
-    }
+//     doAfterViewInit(): void {
+//         if (this.sortRef && this.paginatorRef) {
+//             this.listObservables.push(this.sortRef.sortChange.subscribe(() => this.paginatorRef.pageIndex = 0));
+//             this.listObservables.push(merge(this.sortRef.sortChange, this.paginatorRef.page)
+//                 .pipe(
+//                     tap(
+//                         () => this.loadEntityDataSource()
+//                     )
+//                 ).subscribe());
+//         }
 
-    /**
-     * Permite establecer los filtros para su posterior proceso en el servicio
-     *
-     * @param {any} element - Objeto contenedor de los parametros de filtros
-     *
-     * @example
-     *
-     *     prepareFilter({})
-     */
-    prepareFilter(filterBody: any) {
-        this.filters = filterBody;
-        this.loadEntityDataSource();
-    }
+//     }
 
-    /**
-     * Permite modificar un elemento seleccionado
-     *
-     * @param {any} element - Objeto a modificar
-     *
-     * @example
-     *
-     *     edit(Persona)
-     */
-    edit(element: any) {
-        const extraParams: NavigationExtras = {
-            state: element,
-        };
+//     loadEntityDataSource() {
+//         this.dataSource.loadData(
+//             this.defaultUrlList ? this.defaultUrlList : this.globalSrvInstance.changeDashToBackSlash(this.menuOptions.menuUrl),
+//             this.paginatorRef.pageIndex,
+//             this.paginatorRef.pageSize,
+//             this.sortRef.active,
+//             this.sortRef.direction,
+//             this.filters);
+//     }
 
-        this.entityService.editForm = true;
-        this.routerInstance.navigate(['../' + this.menuOptions.menuUrl + '/' + this.menuOptions.menuDict['EDITAR']['URL']], extraParams);
-    }
+//     /**
+//      * Permite establecer los filtros para su posterior proceso en el servicio
+//      *
+//      * @param {any} element - Objeto contenedor de los parametros de filtros
+//      *
+//      * @example
+//      *
+//      *     prepareFilter({})
+//      */
+//     prepareFilter(filterBody: any) {
+//         this.filters = filterBody;
+//         this.loadEntityDataSource();
+//     }
 
-    /**
-     * Permite establecer el elemento a dar de baja para su posterior proceso en el servicio
-     *
-     * @param {any} element - Objeto a dar de baja
-     * @param {string} url  - url de la peticion http
-     * @example
-     *
-     *     prepareDelete(Persona)
-     */
-    prepareDelete(element: any, url = null) {
-        url = url ? url : this.globalSrvInstance.changeDashToBackSlash(this.menuOptions.menuUrl);
-        this.dialogInstance.open(CustomDialogComponent, {
-            width: Settings.DIALOG_MEDIUM,
-            data: {
-                typeDialog: 'confirm',
-                title: this.viewText.ATTENTION,
-                message: `${this.viewText.CONFIRM_REMOVE} <b>${this.deleteDefaultMessage}</b>?
-               ¿DESEA ELIMINAR DE MANERA PERMANENTE?`,
-            },
+//     /**
+//      * Permite modificar un elemento seleccionado
+//      *
+//      * @param {any} element - Objeto a modificar
+//      *
+//      * @example
+//      *
+//      *     edit(Persona)
+//      */
+//     edit(element: any) {
+//         const extraParams: NavigationExtras = {
+//             state: element,
+//         };
 
-        }).afterClosed().subscribe(accept => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
+//         this.entityService.editForm = true;
+//         this.routerInstance.navigate(['../' + this.menuOptions.menuUrl + '/' + this.menuOptions.menuDict['EDITAR']['URL']], extraParams);
+//     }
 
-            if (accept) {
-                const data = {
-                    id: element.id,
-                    permissionURL: url
-                };
+//     /**
+//      * Permite establecer el elemento a dar de baja para su posterior proceso en el servicio
+//      *
+//      * @param {any} element - Objeto a dar de baja
+//      * @param {string} url  - url de la peticion http
+//      * @example
+//      *
+//      *     prepareDelete(Persona)
+//      */
+//     prepareDelete(element: any, url = null) {
+//         url = url ? url : this.globalSrvInstance.changeDashToBackSlash(this.menuOptions.menuUrl);
+//         this.dialogInstance.open(CustomDialogComponent, {
+//             width: Settings.DIALOG_MEDIUM,
+//             data: {
+//                 typeDialog: 'confirm',
+//                 title: this.viewText.ATTENTION,
+//                 message: `${this.viewText.CONFIRM_REMOVE} <b>${this.deleteDefaultMessage}</b>?
+//                ¿DESEA ELIMINAR DE MANERA PERMANENTE?`,
+//             },
 
-                this.entityService.delete(data).pipe(first()).subscribe(resp => {
-                    this.paginatorRef.pageIndex = 0;
-                    this.loadEntityDataSource();
-                });
-            }
-        });
-    }
+//         }).afterClosed().subscribe(accept => {//DESPUES DE CERRAR LA VENTANA DE CONFIMACIÓN.
 
-    buildMenuPathOptions(menuUrl: string) {
-        this.menuOptions = {
-            menuUrl: menuUrl['URL_BASE'],
-            listar: menuUrl['LISTAR']['PERMISO'],
-            editar: menuUrl['EDITAR']['PERMISO'],
-            nuevo: menuUrl['NUEVO']['PERMISO'],
-            eliminar: menuUrl['ELIMINAR']['PERMISO'],
-            menuDict: menuUrl
-        };
-    }
+//             if (accept) {
+//                 const data = {
+//                     id: element.id,
+//                     permissionURL: url
+//                 };
 
-    abstract doFilter();
-    abstract delete(element: any);
-}
+//                 this.entityService.delete(data).pipe(first()).subscribe(resp => {
+//                     this.paginatorRef.pageIndex = 0;
+//                     this.loadEntityDataSource();
+//                 });
+//             }
+//         });
+//     }
+
+//     buildMenuPathOptions(menuUrl: string) {
+//         this.menuOptions = {
+//             menuUrl: menuUrl['URL_BASE'],
+//             listar: menuUrl['LISTAR']['PERMISO'],
+//             editar: menuUrl['EDITAR']['PERMISO'],
+//             nuevo: menuUrl['NUEVO']['PERMISO'],
+//             eliminar: menuUrl['ELIMINAR']['PERMISO'],
+//             menuDict: menuUrl
+//         };
+//     }
+
+//     abstract doFilter();
+//     abstract delete(element: any);
+// }

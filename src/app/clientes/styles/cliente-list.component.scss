@@ -14,6 +14,15 @@
     height: 72vh; //~72% tomando como referencia el alto de la pantalla
     overflow: auto;
   }
+
+
+  .list-filter-container {
+    position: relative;
+    min-height: 100px;
+    max-height: 100px;
+    height: 72vh; //~72% tomando como referencia el alto de la pantalla
+    overflow: auto;
+  }
   
   table {
     width: 100%;
