@@ -40,7 +40,6 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
       this.username = this.globalService.getUser();
       this.menuList = menu.menuList;
-      console.log(this.menuList)
   }
 
   ngAfterViewInit() {

@@ -23,34 +23,42 @@
         </ng-container> -->
 
 
-        <mat-grid-list  class="list-filter-container" cols="2" rowHeight="1">
-            <mat-grid-tile [colspan]="1">
-                <div [formGroup]="filterForm">
-                    <mat-form-field appearance="outline" class="filter-input">
-                        <input formControlName="name" matInput placeholder="BUSCAR POR ID">
+        <mat-grid-list   cols="6" rowHeight="70px" gutterSize="0px" [style.backgroundColor]="'white'">
+            <mat-grid-tile [colspan]="2">
+                <div [formGroup]="filterForm" class="input-box">
+                    <mat-form-field appearance="outline" class="input-box">
+                        <mat-label>
+                            <mat-icon>search</mat-icon>  BUSCAR POR NOMBRE Y APELLIDO
+                        </mat-label>
+                        <input formControlName="name" matInput placeholder="INGRESE EL NOMBRE Y APELLIDO">
                     </mat-form-field>
                 </div>
 
             </mat-grid-tile>
-            <mat-grid-tile [colspan]="1">
-                <div [formGroup]="filterForm">
-                    <mat-form-field appearance="outline" class="filter-input">
-                        <input formControlName="name" matInput placeholder="BUSCAR POR ID">
+
+            <mat-grid-tile [colspan]="2">
+                <div [formGroup]="filterForm" class="input-box">
+                    <mat-form-field appearance="outline" class="input-box">
+                        <mat-label>
+                            <mat-icon>search</mat-icon>  BUSCAR POR RUC O CÉDULA
+                        </mat-label>
+                        <input formControlName="name" matInput placeholder="INGRESE EL RUC O CÉDULA">
                     </mat-form-field>
                 </div>
 
             </mat-grid-tile>
+            
         </mat-grid-list>
 
         
 
-       <mat-table  class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
+       <mat-table [dataSource]="dataSource.content" class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
         <ng-container matColumnDef="nombre">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
                 NOMBRE
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.position}}
+                {{element.nombre}}
             </mat-cell>
         </ng-container>
 
@@ -59,7 +67,7 @@
                 APELLIDO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.name}}
+                {{element.apellido}}
             </mat-cell>
         </ng-container>
 
@@ -68,7 +76,7 @@
                 CÉDULA
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.weight}}
+                {{element.cedula}}
             </mat-cell>
         </ng-container>
 
@@ -77,7 +85,7 @@
                 RUC
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.symbol}}
+                {{element.ruc}}
             </mat-cell>
         </ng-container>
 
@@ -86,7 +94,7 @@
                 DIRECCION
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.symbol}}
+                {{element.direccion}}
             </mat-cell>
         </ng-container>
 
@@ -119,7 +127,7 @@
                     </button>
 
                     <mat-menu #actions>
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="OnClickEditCliente()">
                             <mat-icon class="mat-18">edit</mat-icon>
                             EDITAR
                         </button>

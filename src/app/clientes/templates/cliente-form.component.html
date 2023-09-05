@@ -1,1 +1,124 @@
-<p>cliente-form works!</p>
+ <div class="form-container">
+
+    <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
+        <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
+
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        NOMBRE
+                    </mat-label>
+                    <input formControlName="nombre" matInput placeholder="NOMBRE" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('nombre') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        APELLIDO
+                    </mat-label>
+                    <input formControlName="direccion" matInput placeholder="DIRECCION" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('direccion') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        TELEFONO
+                    </mat-label>
+                    <input formControlName="telefono" matInput placeholder="TELEFONO" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('telefono') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        CEDULA
+                    </mat-label>
+                    <input formControlName="cedula" matInput placeholder="RUC" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('telefono') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        RUC
+                    </mat-label>
+                    <input formControlName="ruc" matInput placeholder="RUC" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('telefono') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        DIRECCIÓN
+                    </mat-label>
+                    <input formControlName="direccion" matInput placeholder="RUC" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('telefono') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        TELEFONO
+                    </mat-label>
+                    <input formControlName="telefono" matInput placeholder="RUC" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('telefono') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        EMAIL
+                    </mat-label>
+                    <input formControlName="email" matInput placeholder="RUC" required>
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('telefono') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <div class="buttons-container">
+            <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button">
+                {{ viewText.REGISTER }}
+                <mat-icon>save</mat-icon>
+            </button>
+            <button id="update" *ngIf="params"  mat-raised-button color="primary">
+                {{ viewText.UPDATE }}
+                <mat-icon>update</mat-icon>
+            </button>
+            <button type="button" mat-raised-button >
+                {{ viewText.CANCEL }}
+                <mat-icon>clear</mat-icon>
+            </button>
+        </div>
+
+    </form>
+</div>
