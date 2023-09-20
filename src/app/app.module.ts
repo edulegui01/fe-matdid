@@ -10,6 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationModule } from './components/navigation.module';
 import { ClienteModule } from './clientes/cliente.module';
+import { CustomDialogModule } from './components/custom-dialog/custom-dialog.module';
+import { ProveedorModule } from './proveedores/proveedor.module';
+import { ProductoModule } from './producto/producto.module';
 
 
 
@@ -28,7 +31,10 @@ import { ClienteModule } from './clientes/cliente.module';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NavigationModule,
-    ClienteModule
+    ClienteModule,
+    CustomDialogModule,
+    ProveedorModule,
+    ProductoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

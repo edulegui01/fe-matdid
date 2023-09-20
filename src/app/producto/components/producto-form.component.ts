@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientesService } from '../services/clientes.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
 import { ClienteToSave } from 'src/app/class/clienteToSave';
@@ -8,23 +7,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Settings } from 'src/app/class/settings';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
+import { ProductoService } from '../services/producto.service';
 
 @Component({
-  selector: 'app-cliente-form',
-  templateUrl: '../templates/cliente-form.component.html',
-  styleUrls: ['../styles/cliente-form.component.scss']
+  selector: 'app-producto-form',
+  templateUrl: '../templates/producto-form.component.html',
+  styleUrls: ['../styles/producto-form.component.scss']
 })
-export class ClienteFormComponent implements OnInit {
+export class ProductoFormComponent implements OnInit {
 
   entityForm!:FormGroup;
   entity:any=null;
   params:any=null;
   viewText = GlobalMessage.VIEW_LABELS;
   colsSize=2;
-  listadoLocalidad!:any[];
-  clienteToSave!:ClienteToSave;
+  proveedorToSave!:ClienteToSave;
   routerInstance:Router;
-  clienteToUpdate:any;
+  proveedorToUpdate:any;
   snackbarInstance!: MatSnackBar;
   createDefaultMessage = 'EL REGISTRO';
 
@@ -32,7 +31,7 @@ export class ClienteFormComponent implements OnInit {
 
 
 
-  constructor(public clienteService:ClientesService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
+  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
 
     this.routerInstance = router;
 
@@ -45,7 +44,7 @@ export class ClienteFormComponent implements OnInit {
         }
     }
 
-    this.clienteService.getLocalidades().subscribe(localidad => this.listadoLocalidad = localidad);
+    
 
     this.buildForm(this.entity);
 
@@ -60,21 +59,20 @@ export class ClienteFormComponent implements OnInit {
     this.entityForm = this.formBuilder.group({
         id: [entity ? entity.id : ''],
         nombre: [entity ? entity.nombre : '', Validators.required],
-        apellido: [entity ? entity.apellido : '', Validators.required],
-        cedula: [entity ? entity.cedula : '', Validators.required],
-        ruc: [entity ? entity.ruc : ''],
-        direccion: [entity ? entity.direccion : '', Validators.required],
-        telefono: [entity ? entity.telefono : '', Validators.required],
-        email: [entity ? entity.email : '', Validators.required],
-        localidad: [entity ? entity.localidad.id : '', Validators.required]
+        cantidad: [entity ? entity.cantidad : '', Validators.required],
+        cantidadMinima: [entity ? entity.cantidadMinima : '', Validators.required],
+        precioCosto: [entity ? entity.precioCosto : ''],
+        precioVenta: [entity ? entity.precioVenta : '', Validators.required],
+        iva: [entity ? entity.iva : '', Validators.required]
+        
 
     });
   }
 
   saveCliente(){
-    this.clienteToSave = {
+    this.proveedorToSave = {
       cedula:this.entityForm.controls['cedula'].value,
-      es_cliente:true,
+      es_cliente:false,
       localidad:{
         id:this.entityForm.controls['localidad'].value
       },
@@ -109,9 +107,9 @@ export class ClienteFormComponent implements OnInit {
           if (data) {
               
 
-              this.clienteService.saveClientes(this.clienteToSave).subscribe(result => {
-                this.routerInstance.navigate(['../cliente/listar-cliente'])
-              });
+              // this.productoService.saveClientes(this.proveedorToSave).subscribe(result => {
+              //   this.routerInstance.navigate(['../proveedor/listar-proveedor'])
+              // });
           }
       });
 
@@ -121,7 +119,7 @@ export class ClienteFormComponent implements OnInit {
 
 
   updateCliente(){
-    this.clienteToUpdate = {
+    this.proveedorToUpdate = {
       cedula:this.entityForm.controls['cedula'].value,
       es_cliente:true,
       localidad:{
@@ -155,10 +153,10 @@ export class ClienteFormComponent implements OnInit {
           },
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
-            this.clienteService.updateCliente(this.entity.idPersona,this.clienteToUpdate).subscribe(result => {
-              this.routerInstance.navigate(['../cliente/listar-cliente']);
-              this.clienteService.editForm = false;
-            });
+            // this.proveedorService.updateCliente(this.entity.idPersona,this.proveedorToUpdate).subscribe(result => {
+            //   this.routerInstance.navigate(['../cliente/listar-cliente']);
+            //   this.proveedorService.editForm = false;
+            // });
           }
       });
 
@@ -175,8 +173,8 @@ export class ClienteFormComponent implements OnInit {
   }
 
   closeForm() {
-    this.routerInstance.navigate(['../cliente/listar-cliente']);
-    this.clienteService.editForm = false;
+    this.routerInstance.navigate(['../producto/listar-producto']);
+    this.productoService.editForm = false;
   }
 
 

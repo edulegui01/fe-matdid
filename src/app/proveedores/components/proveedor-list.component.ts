@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
 import { MENU_URLS } from 'src/app/components/navbar/routes';
-import { ClientesService } from '../services/clientes.service';
+import { ProveedorService } from '../services/proveedor.service';
 import { Cliente } from 'src/app/class/cliente';
 import { NavigationExtras, Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,11 +16,11 @@ import { Settings } from 'src/app/class/settings';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
 
 @Component({
-  selector: 'app-cliente-list',
-  templateUrl: '../templates/cliente-list.component.html',
-  styleUrls: ['../styles/cliente-list.component.scss']
+  selector: 'app-proveedor-list',
+  templateUrl: '../templates/proveedor-list.component.html',
+  styleUrls: ['../styles/proveedor-list.component.scss']
 })
-export class ClienteListComponent  implements OnInit {
+export class ProveedorListComponent  implements OnInit {
   
   dataSource!:ClienteData;
   clienteToEdit!:any;
@@ -38,7 +38,7 @@ export class ClienteListComponent  implements OnInit {
   
   
 
-  constructor(private clienteService:ClientesService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {
+  constructor(private proveedorService:ProveedorService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class ClienteListComponent  implements OnInit {
 
 
   initDataSource(){
-    this.clienteService.getClientes().subscribe( (clienteData:ClienteData) => this.dataSource = clienteData)
+    this.proveedorService.getClientes().subscribe( (clienteData:ClienteData) => this.dataSource = clienteData)
   }
 
 
@@ -77,7 +77,7 @@ export class ClienteListComponent  implements OnInit {
     }
 
 
-    this.clienteService.getClientes(page,size,cedula,name).subscribe((clienteData:ClienteData) => this.dataSource = clienteData);
+    this.proveedorService.getClientes(page,size,cedula,name).subscribe((clienteData:ClienteData) => this.dataSource = clienteData);
   }
 
 
@@ -88,7 +88,7 @@ export class ClienteListComponent  implements OnInit {
 
     console.log(cedula);
     
-    this.clienteService.getClientes('0','10',cedula,name).subscribe((clienteData:ClienteData) => this.dataSource = clienteData);
+    this.proveedorService.getClientes('0','10',cedula,name).subscribe((clienteData:ClienteData) => this.dataSource = clienteData);
   }
 
 
@@ -111,9 +111,9 @@ export class ClienteListComponent  implements OnInit {
                     this.paginatorf.pageIndex = 0;
 
 
-                      this.clienteService.deleteCliente(element.idPersona).subscribe(resp => {
+                      this.proveedorService.deleteCliente(element.idPersona).subscribe(resp => {
                         this.paginatorf.pageIndex = 0;
-                        this.clienteService.getClientes().subscribe( (clienteData:ClienteData) => this.dataSource = clienteData)
+                        this.proveedorService.getClientes().subscribe( (clienteData:ClienteData) => this.dataSource = clienteData)
                       });
                   }
               });
@@ -125,7 +125,7 @@ export class ClienteListComponent  implements OnInit {
     const extraParams: NavigationExtras = {
        state: element,
     };
-    this.clienteService.editForm=true;
+    this.proveedorService.editForm=true;
     console.log(element);
     this.routerInstance.navigate(['cliente/editar-cliente'],extraParams);
     

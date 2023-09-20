@@ -57,5 +57,51 @@ export const MENU_URLS = {
             URL: 'eliminar-cliente',
             PERMISO: 'ELIMINAR_HORARIO'
         },
+    },
+    PROVEEDOR: {
+        URL_BASE: 'proveedor',
+        ROOT: {
+            URL: 'listar-proveedor',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-proveedor',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-proveedor',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-proveedor',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-proveedor',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
+    PRODUCTO: {
+        URL_BASE: 'producto',
+        ROOT: {
+            URL: 'listar-producto',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-producto',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-producto',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-producto',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-producto',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
     }
 };

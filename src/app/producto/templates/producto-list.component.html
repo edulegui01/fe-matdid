@@ -28,75 +28,67 @@
                 <div [formGroup]="filterForm" class="input-box">
                     <mat-form-field appearance="outline" class="input-box">
                         <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR NOMBRE Y APELLIDO
+                            <mat-icon>search</mat-icon>  BUSCAR POR DESCRIPCIÓN DEL PRODUCTO
                         </mat-label>
-                        <input formControlName="name" matInput placeholder="INGRESE EL NOMBRE Y APELLIDO" (keydown.enter)="doFilter()">
+                        <input formControlName="nombre" matInput placeholder="INGRESE LA DESCRIPCIÓN" (keydown.enter)="doFilter()">
                     </mat-form-field>
                 </div>
 
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="2">
-                <div [formGroup]="filterForm" class="input-box">
-                    <mat-form-field appearance="outline" class="input-box">
-                        <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR RUC O CÉDULA
-                        </mat-label>
-                        <input formControlName="cedula" matInput placeholder="INGRESE EL RUC O CÉDULA" (keydown.enter)="doFilter()">
-                    </mat-form-field>
-                </div>
-
-            </mat-grid-tile>
+           
             
         </mat-grid-list>
 
         
 
        <mat-table [dataSource]="dataSource.content" class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
-        <ng-container matColumnDef="nombre">
+        <ng-container matColumnDef="descripcion">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                NOMBRE
+                DESCRIPCIÓN
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 {{element.nombre}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="apellido">
+        <ng-container matColumnDef="cantidad">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                APELLIDO
+                CANTIDAD
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.apellido}}
+                {{element.cantidad}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="cedula">
+        <ng-container matColumnDef="iva">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                CÉDULA
+                IVA
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.cedula}}
+                {{element.iva}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="ruc">
+        <ng-container matColumnDef="precioCosto">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                RUC
+                PRECIO COSTO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.ruc}}
+                {{element.precioCosto}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="direccion">
+        <ng-container matColumnDef="precioVenta">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                DIRECCION
+                PRECIO VENTA
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.direccion}}
+                {{element.precioVenta}}
             </mat-cell>
         </ng-container>
+
+        
 
         <!--filters-->
        

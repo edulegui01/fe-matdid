@@ -13,7 +13,7 @@ export class ClienteComponent implements OnInit {
   constructor(public clienteService:ClientesService) { }
 
   ngOnInit(): void {
-    
+   console.log(this.clienteService.editForm);
   }
 
 

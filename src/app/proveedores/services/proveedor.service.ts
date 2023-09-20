@@ -10,7 +10,7 @@ import {Settings} from 'src/app/class/settings';
 @Injectable({
   providedIn: 'root'
 })
-export class ClientesService {
+export class ProveedorService {
 
   httpUrls={
     urlListar:'/persona/listar',
@@ -36,7 +36,7 @@ export class ClientesService {
     params = params.append('size',String(size));
     params = params.append('cedulaFilter',String(cedulaFilter));
     params = params.append('nombreFilter',String(nombreFilter));
-    params = params.append('esCliente',Boolean(true));
+    params = params.append('esCliente',Boolean(false));
 
 
     return this.http.get<ClienteData>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(

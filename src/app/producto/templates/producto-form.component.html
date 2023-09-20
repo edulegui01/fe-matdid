@@ -1,4 +1,4 @@
- <div class="form-container">
+<div class="form-container">
 
     <form #formTemplate="ngForm" [formGroup]="entityForm" class="form mat-elevation-z2">
         <mat-grid-list [cols]="colsSize" rowHeight="70px" gutterSize="0px" (window:resize)="onResize()">
@@ -8,9 +8,9 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        NOMBRE
+                        DESCRIPCIÓN
                     </mat-label>
-                    <input formControlName="nombre" matInput placeholder="NOMBRE" required>
+                    <input formControlName="nombre" matInput placeholder="DESCRIPCIÓN" required>
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('nombre') }}
                     </mat-error>
@@ -21,11 +21,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        APELLIDO
+                        CANTIDAD
                     </mat-label>
-                    <input formControlName="apellido" matInput placeholder="APELLIDO" required>
+                    <input formControlName="cantidad" matInput placeholder="CANTIDAD" required>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('apellido') }}
+                        {{ getErrorMessage('cantidad') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -34,11 +34,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        TELEFONO
+                        CANTIDAD MINIMA
                     </mat-label>
-                    <input formControlName="telefono" matInput placeholder="TELEFONO" required>
+                    <input formControlName="cantidadMinima" matInput placeholder="CANTIDAD MINIMA" required>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('telefono') }}
+                        {{ getErrorMessage('cantidadMinima') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -46,11 +46,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        CEDULA
+                        PRECIO COSTO
                     </mat-label>
-                    <input formControlName="cedula" matInput placeholder="CEDULA" required>
+                    <input formControlName="precioCosto" matInput placeholder="PRECIO COSTO" required>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('cedula') }}
+                        {{ getErrorMessage('precioCosto') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -58,11 +58,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        RUC
+                        PRECIO VENTA
                     </mat-label>
-                    <input formControlName="ruc" matInput placeholder="RUC">
+                    <input formControlName="precioVenta" matInput placeholder="PRECIO VENTA">
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('ruc') }}
+                        {{ getErrorMessage('precioVenta') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -70,40 +70,18 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        DIRECCIÓN
+                        IVA
                     </mat-label>
-                    <input formControlName="direccion" matInput placeholder="DIRECCIÓN" required>
+                    <input formControlName="iva" matInput placeholder="IVA" required>
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('direccion') }}
+                        {{ getErrorMessage('iva') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
 
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>
-                        EMAIL
-                    </mat-label>
-                    <input formControlName="email" matInput placeholder="EMAIL" required>
-                    <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('email') }}
-                    </mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
             
-           <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <mat-form-field>
-                    <mat-label>LOCALIDAD</mat-label>
-                    <mat-select formControlName="localidad" id="gestionSelect">
-                        <mat-option>SELECCIONAR LOCALIDAD</mat-option>
-                        <mat-option *ngFor="let localidad of listadoLocalidad" [value]="localidad.id">
-                            {{localidad.descripcion_distrito}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="entityForm.invalid">{{ getErrorMessage('localidad') }}</mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
+           
 
         </mat-grid-list>
 
