@@ -13,17 +13,17 @@ import { PaginatorEs } from 'src/app/utils/paginatorEs';
 import { MatDialog } from '@angular/material/dialog';
 import { Settings } from 'src/app/class/settings';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
-import { ProductoService } from '../services/producto.service';
-import { ProductoData } from 'src/app/class/productoData';
+import { FuncionarioData } from 'src/app/class/funcionarioData';
+import { FuncionarioService } from '../services/funcionario.service';
 
 @Component({
-  selector: 'app-producto-list',
-  templateUrl: '../templates/producto-list.component.html',
-  styleUrls: ['../styles/producto-list.component.scss']
+  selector: 'app-funcionario-list',
+  templateUrl: '../templates/funcionario-list.component.html',
+  styleUrls: ['../styles/funcionario-list.component.scss']
 })
-export class ProductoListComponent  implements OnInit {
+export class FuncionarioListComponent  implements OnInit {
   
-  dataSource!:ProductoData;
+  dataSource!:FuncionarioData;
   clienteToEdit!:any;
   routerInstant!:Router;
   paginatorRange = GlobalMessage.PAGINATOR_RANGE;
@@ -39,7 +39,7 @@ export class ProductoListComponent  implements OnInit {
   
   
 
-  constructor(private productoService:ProductoService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {
+  constructor(private funcionarioService:FuncionarioService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -47,8 +47,8 @@ export class ProductoListComponent  implements OnInit {
     this.ChangePaginatorEspa();
     
     this.filterForm = this.fb.group({
-      nombre: [''],
-      
+      name: [''],
+      cedula: ['']
     })
   }
 
@@ -60,7 +60,7 @@ export class ProductoListComponent  implements OnInit {
 
 
   initDataSource(){
-    this.productoService.getProductos().subscribe( (productoData:ProductoData) => this.dataSource = productoData)
+    this.funcionarioService.getClientes().subscribe( (funcionarioData:FuncionarioData) => this.dataSource = funcionarioData)
   }
 
 
@@ -68,31 +68,32 @@ export class ProductoListComponent  implements OnInit {
     let page = event.pageIndex;
     let size = event.pageSize;
 
-    let nombre:string='';
-    
+    let cedula:string='';
+    let name:string='';
 
     if (this.filterForm.value.cedula || this.filterForm.value.name){
-      nombre = this.filterForm.value.nombre;
-      
+      cedula = this.filterForm.value.cedula;
+      name = this.filterForm.value.name;
 
     }
 
 
-    this.productoService.getProductos(page,size,nombre).subscribe((productoData:ProductoData) => this.dataSource = productoData);
+    this.funcionarioService.getClientes(page,size,cedula,name).subscribe((funcionarioData:FuncionarioData) => this.dataSource = funcionarioData);
   }
 
 
   doFilter(){
     
-   
-    let nombre = this.filterForm.value.nombre;
+    let cedula = this.filterForm.value.cedula;
+    let name = this.filterForm.value.name;
 
+    console.log(cedula);
     
-    this.productoService.getProductos('0','10',nombre).subscribe((productoData:ProductoData) => this.dataSource = productoData);
+    this.funcionarioService.getClientes('0','10',cedula,name).subscribe((funcionarioData:FuncionarioData) => this.dataSource = funcionarioData);
   }
 
 
-  OnClickDeleteProducto(element:any){
+  OnClickDeleteCliente(element:any){
     
     this.dialogInstance.open(CustomDialogComponent, {
                   width: Settings.DIALOG_MEDIUM,
@@ -111,9 +112,9 @@ export class ProductoListComponent  implements OnInit {
                     this.paginatorf.pageIndex = 0;
 
 
-                      this.productoService.deleteProducto(element.idProducto).subscribe(resp => {
+                      this.funcionarioService.deleteCliente(element.idPersona).subscribe(resp => {
                         this.paginatorf.pageIndex = 0;
-                        this.productoService.getProductos().subscribe( (productoData:ProductoData) => this.dataSource = productoData)
+                        this.funcionarioService.getClientes().subscribe( (funcionarioData:FuncionarioData) => this.dataSource = funcionarioData)
                       });
                   }
               });
@@ -125,9 +126,9 @@ export class ProductoListComponent  implements OnInit {
     const extraParams: NavigationExtras = {
        state: element,
     };
-    this.productoService.editForm=true;
+    this.funcionarioService.editForm=true;
     console.log(element);
-    this.routerInstance.navigate(['producto/editar-producto'],extraParams);
+    this.routerInstance.navigate(['funcionario/editar-cliente'],extraParams);
     
     
 
@@ -144,8 +145,8 @@ export class ProductoListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['descripcion', 'precioCosto', 'precioVenta', 'iva', 'cantidad', 'options'];
-  displayedFilters: string[] = ['nombre-filter'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'cedula', 'direccion', 'estado', 'options'];
+  displayedFilters: string[] = ['cedula-filter', 'name-filter'];
   
 }
 

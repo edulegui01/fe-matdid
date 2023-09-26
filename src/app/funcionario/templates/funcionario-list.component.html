@@ -28,67 +28,75 @@
                 <div [formGroup]="filterForm" class="input-box">
                     <mat-form-field appearance="outline" class="input-box">
                         <mat-label>
-                            <mat-icon>search</mat-icon>  BUSCAR POR DESCRIPCIÓN DEL PRODUCTO
+                            <mat-icon>search</mat-icon>  BUSCAR POR NOMBRE Y APELLIDO
                         </mat-label>
-                        <input formControlName="nombre" matInput placeholder="INGRESE LA DESCRIPCIÓN" (keydown.enter)="doFilter()">
+                        <input formControlName="name" matInput placeholder="INGRESE EL NOMBRE Y APELLIDO" (keydown.enter)="doFilter()">
                     </mat-form-field>
                 </div>
 
             </mat-grid-tile>
 
-           
+            <mat-grid-tile [colspan]="2">
+                <div [formGroup]="filterForm" class="input-box">
+                    <mat-form-field appearance="outline" class="input-box">
+                        <mat-label>
+                            <mat-icon>search</mat-icon>  BUSCAR POR CÉDULA
+                        </mat-label>
+                        <input formControlName="cedula" matInput placeholder="INGRESE LA CÉDULA" (keydown.enter)="doFilter()">
+                    </mat-form-field>
+                </div>
+
+            </mat-grid-tile>
             
         </mat-grid-list>
 
         
 
        <mat-table [dataSource]="dataSource.content" class="list-table-container" matSort matSortActive="nombre"   matSortDisableClear matSortDirection="desc">
-        <ng-container matColumnDef="descripcion">
+        <ng-container matColumnDef="nombre">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                DESCRIPCIÓN
+                NOMBRE
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 {{element.nombre}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="cantidad">
+        <ng-container matColumnDef="apellido">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                CANTIDAD
+                APELLIDO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.cantidad}}
+                {{element.apellido}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="iva">
+        <ng-container matColumnDef="cedula">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                IVA
+                CÉDULA
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.iva}}
+                {{element.cedula}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="precioCosto">
+        <ng-container matColumnDef="direccion">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                PRECIO COSTO
+                DIRECCIÓN
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.precioCosto}}
+                {{element.direccion}}
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="precioVenta">
+        <ng-container matColumnDef="estado">
             <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
-                PRECIO VENTA
+                ESTADO
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{element.precioVenta}}
+                {{element.activo === 'A' ? 'ACTIVO':'INACTIVO'}}
             </mat-cell>
         </ng-container>
-
-        
 
         <!--filters-->
        
@@ -126,7 +134,7 @@
 
                         <mat-divider></mat-divider>
 
-                        <button mat-menu-item (click)="OnClickDeleteProducto(element)">
+                        <button mat-menu-item (click)="OnClickDeleteCliente(element)">
                             <mat-icon class="mat-18">
                                 delete
                             </mat-icon>

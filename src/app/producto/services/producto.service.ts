@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, observable, throwError } from 'rxjs';
 import { ClienteData } from 'src/app/class/clienteData';
+import { Producto } from 'src/app/class/producto';
 import { ProductoData } from 'src/app/class/productoData';
 import {Settings} from 'src/app/class/settings';
 
@@ -41,6 +42,19 @@ export class ProductoService {
       map((productoData:ProductoData) => productoData)
     )
 
+  }
+
+  public saveProducto(producto:Producto):Observable<any>{
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,producto);
+  }
+
+
+  public updateProducto(id:string,producto:any){
+    return this.http.put(Settings.URL_BASE+this.httpUrls.urlActualiazr+id,producto);
+  }
+
+  public deleteProducto(id:string){
+    return this.http.delete(Settings.URL_BASE+this.httpUrls.urlEliminar+id)
   }
 
   

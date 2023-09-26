@@ -103,5 +103,28 @@ export const MENU_URLS = {
             URL: 'eliminar-producto',
             PERMISO: 'ELIMINAR_HORARIO'
         },
+    },
+    FUNCIONARIO: {
+        URL_BASE: 'funcionario',
+        ROOT: {
+            URL: 'listar-funcionario',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-funcionario',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-funcionario',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-funcionario',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-funcionario',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
     }
 };

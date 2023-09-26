@@ -6,6 +6,8 @@ import { ProveedorComponent } from 'src/app/proveedores/components/proveedor.com
 import { routes as routeProveedor } from 'src/app/proveedores/proveedor.routing';
 import {routes as routeProducto} from 'src/app/producto/producto.routing'
 import { ProductoComponent } from 'src/app/producto/components/producto.component';
+import { FuncionarioComponent } from 'src/app/funcionario/components/funcionario.component';
+import {routes as routerFuncionario} from 'src/app/funcionario/funcionario.routing'
 
 export const routes: Routes = [
     {
@@ -22,5 +24,11 @@ export const routes: Routes = [
         path: MENU_URLS.PRODUCTO.URL_BASE,
         component: ProductoComponent,
         children: routeProducto
+    },
+    {
+        path: MENU_URLS.FUNCIONARIO.URL_BASE,
+        component: FuncionarioComponent,
+        children: routerFuncionario
     }
+
 ];

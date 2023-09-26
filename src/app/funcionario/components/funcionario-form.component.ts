@@ -7,24 +7,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Settings } from 'src/app/class/settings';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
-import { ProductoService } from '../services/producto.service';
-import { Producto } from 'src/app/class/producto';
+import { FuncionarioToSave } from 'src/app/class/funcionarioToSave';
+import { FuncionarioService } from '../services/funcionario.service';
 
 @Component({
-  selector: 'app-producto-form',
-  templateUrl: '../templates/producto-form.component.html',
-  styleUrls: ['../styles/producto-form.component.scss']
+  selector: 'app-funcionario-form',
+  templateUrl: '../templates/funcionario-form.component.html',
+  styleUrls: ['../styles/funcionario-form.component.scss']
 })
-export class ProductoFormComponent implements OnInit {
+export class FuncionarioFormComponent implements OnInit {
 
   entityForm!:FormGroup;
   entity:any=null;
   params:any=null;
   viewText = GlobalMessage.VIEW_LABELS;
   colsSize=2;
-  productoToSave!:Producto;
+  listadoLocalidad!:any[];
+  funcionarioToSave!:FuncionarioToSave;
   routerInstance:Router;
-  productoToUpdate:any;
+  funcionarioToUpdate:any;
   snackbarInstance!: MatSnackBar;
   createDefaultMessage = 'EL REGISTRO';
 
@@ -32,7 +33,7 @@ export class ProductoFormComponent implements OnInit {
 
 
 
-  constructor(public productoService:ProductoService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
+  constructor(public funcionarioService:FuncionarioService, private formBuilder:FormBuilder, router: Router, private dialogInstance: MatDialog ) { 
 
     this.routerInstance = router;
 
@@ -45,7 +46,7 @@ export class ProductoFormComponent implements OnInit {
         }
     }
 
-    
+    this.funcionarioService.getLocalidades().subscribe(localidad => this.listadoLocalidad = localidad);
 
     this.buildForm(this.entity);
 
@@ -60,25 +61,31 @@ export class ProductoFormComponent implements OnInit {
     this.entityForm = this.formBuilder.group({
         id: [entity ? entity.id : ''],
         nombre: [entity ? entity.nombre : '', Validators.required],
-        cantidad: [entity ? entity.cantidad : '', Validators.required],
-        cantidadMinima: [entity ? entity.cantidadMinima : '', Validators.required],
-        precioCosto: [entity ? entity.precioCosto : ''],
-        precioVenta: [entity ? entity.precioVenta : '', Validators.required],
-        iva: [entity ? entity.iva : '', Validators.required]
-        
+        apellido: [entity ? entity.apellido : '', Validators.required],
+        cedula: [entity ? entity.cedula : '', Validators.required],
+        direccion: [entity ? entity.direccion : '', Validators.required],
+        telefono: [entity ? entity.telefono : '', Validators.required],
+        fechaAlta: [entity ? entity.fechaAlta : '', Validators.required],
+        localidad: [entity ? entity.localidad.id : '', Validators.required],
+        activo: [entity ? entity.localidad.activo : '', Validators.required],
+        fechaNac: [entity ? entity.localidad.fechaNac : '', Validators.required],
 
     });
   }
 
-  saveProducto(){
-    this.productoToSave = {
-      idProducto:this.entityForm.controls['id'].value,
+  saveCliente(){
+    this.funcionarioToSave = {
+      cedula:this.entityForm.controls['cedula'].value,
+      localidad:{
+        id:this.entityForm.controls['localidad'].value
+      },
+      apellido:this.entityForm.controls['apellido'].value,
+      direccion:this.entityForm.controls['direccion'].value,
+      fechaAlta:this.entityForm.controls['fechaAlta'].value,
       nombre:this.entityForm.controls['nombre'].value,
-      precioCosto:this.entityForm.controls['precioCosto'].value,
-      precioVenta:this.entityForm.controls['precioVenta'].value,
-      iva:this.entityForm.controls['iva'].value,
-      cantidadMinima:this.entityForm.controls['cantidadMinima'].value,
-      cantidad:this.entityForm.controls['cantidad'].value
+      fechaNac:this.entityForm.controls['fechaNac'].value,
+      telefono:this.entityForm.controls['telefono'].value,
+      activo:this.entityForm.controls['activo'].value
     }
 
 
@@ -104,9 +111,9 @@ export class ProductoFormComponent implements OnInit {
           if (data) {
               
 
-              this.productoService.saveProducto(this.productoToSave).subscribe(result => {
-                this.routerInstance.navigate(['../producto/listar-producto'])
-              });
+            //   this.funcionarioService.saveClientes(this.funcionarioToSave).subscribe(result => {
+            //     this.routerInstance.navigate(['../cliente/listar-cliente'])
+            //   });
           }
       });
 
@@ -115,14 +122,19 @@ export class ProductoFormComponent implements OnInit {
   }
 
 
-  updateProducto(){
-    this.productoToUpdate = {
-      nombre:this.entityForm.controls['nombre'].value,
-      precioCosto:this.entityForm.controls['precioCosto'].value,
-      precioVenta:this.entityForm.controls['precioVenta'].value,
-      iva:this.entityForm.controls['iva'].value,
-      cantidadMinima:this.entityForm.controls['cantidadMinima'].value,
-      cantidad:this.entityForm.controls['cantidad'].value
+  updateCliente(){
+    this.funcionarioToUpdate = {
+        cedula:this.entityForm.controls['cedula'].value,
+        localidad:{
+          id:this.entityForm.controls['localidad'].value
+        },
+        apellido:this.entityForm.controls['apellido'].value,
+        direccion:this.entityForm.controls['direccion'].value,
+        fechaAlta:this.entityForm.controls['fechaAlta'].value,
+        nombre:this.entityForm.controls['nombre'].value,
+        fechaNac:this.entityForm.controls['fechaNac'].value,
+        telefono:this.entityForm.controls['telefono'].value,
+        activo:this.entityForm.controls['activo'].value
     }
 
     if (this.entityForm.invalid) {
@@ -145,10 +157,10 @@ export class ProductoFormComponent implements OnInit {
           },
       }).afterClosed().pipe().subscribe(data => {
           if (data) {
-            this.productoService.updateProducto(this.entity.idProducto,this.productoToUpdate).subscribe(result => {
-              this.routerInstance.navigate(['../producto/listar-producto']);
-              this.productoService.editForm = false;
-            });
+            // this.clienteService.updateCliente(this.entity.idPersona,this.clienteToUpdate).subscribe(result => {
+            //   this.routerInstance.navigate(['../cliente/listar-cliente']);
+            //   this.clienteService.editForm = false;
+            // });
           }
       });
 
@@ -165,8 +177,8 @@ export class ProductoFormComponent implements OnInit {
   }
 
   closeForm() {
-    this.routerInstance.navigate(['../producto/listar-producto']);
-    this.productoService.editForm = false;
+    this.routerInstance.navigate(['../funcionario/listar-funcionario']);
+    this.funcionarioService.editForm = false;
   }
 
 

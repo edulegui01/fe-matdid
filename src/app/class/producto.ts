@@ -5,4 +5,5 @@ export interface Producto {
     precioVenta:number;
     cantidadMinima:string;
     iva:number
+    cantidad:number
 }

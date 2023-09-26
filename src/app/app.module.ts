@@ -13,6 +13,7 @@ import { ClienteModule } from './clientes/cliente.module';
 import { CustomDialogModule } from './components/custom-dialog/custom-dialog.module';
 import { ProveedorModule } from './proveedores/proveedor.module';
 import { ProductoModule } from './producto/producto.module';
+import { FuncionarioModule } from './funcionario/funcionario.module';
 
 
 
@@ -34,7 +35,8 @@ import { ProductoModule } from './producto/producto.module';
     ClienteModule,
     CustomDialogModule,
     ProveedorModule,
-    ProductoModule
+    ProductoModule,
+    FuncionarioModule
   ],
   providers: [],
   bootstrap: [AppComponent]
