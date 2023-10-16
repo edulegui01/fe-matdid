@@ -8,6 +8,9 @@ import {routes as routeProducto} from 'src/app/producto/producto.routing'
 import { ProductoComponent } from 'src/app/producto/components/producto.component';
 import { FuncionarioComponent } from 'src/app/funcionario/components/funcionario.component';
 import {routes as routerFuncionario} from 'src/app/funcionario/funcionario.routing'
+import { LocalidadComponent } from 'src/app/localidad/components/localidad.component';
+import {routes as routerLocalidad} from 'src/app/localidad/localidad.routing'
+import { PruebaComponent } from 'src/app/prueba/prueba.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +32,12 @@ export const routes: Routes = [
         path: MENU_URLS.FUNCIONARIO.URL_BASE,
         component: FuncionarioComponent,
         children: routerFuncionario
-    }
+    },
+    {
+        path: MENU_URLS.LOCALIDAD.URL_BASE,
+        component: LocalidadComponent,
+        children: routerLocalidad
+    },
+   
 
 ];

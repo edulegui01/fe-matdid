@@ -8,9 +8,9 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        DESCRIPCIÓN
+                        NOMBRE
                     </mat-label>
-                    <input formControlName="nombre" matInput placeholder="DESCRIPCIÓN" required>
+                    <input formControlName="nombre" matInput placeholder="NOMBRE" required readonly="entity.readOnly" >
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('nombre') }}
                     </mat-error>
@@ -21,11 +21,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        CANTIDAD
+                        DESCRIPCION
                     </mat-label>
-                    <input formControlName="cantidad" matInput placeholder="CANTIDAD" required>
+                    <input formControlName="descripcion" matInput placeholder="DESCRIPCION" required readonly="entity.readOnly">
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('cantidad') }}
+                        {{ getErrorMessage('descripcion') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -34,11 +34,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        CANTIDAD MINIMA
+                        AUTOR
                     </mat-label>
-                    <input formControlName="cantidadMinima" matInput placeholder="CANTIDAD MINIMA" required>
+                    <input formControlName="autor" matInput placeholder="AUTOR" required readonly="entity.readOnly">
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('cantidadMinima') }}
+                        {{ getErrorMessage('autor') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -46,11 +46,11 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        PRECIO COSTO
+                        EDITORIAL
                     </mat-label>
-                    <input formControlName="precioCosto" matInput placeholder="PRECIO COSTO" required>
+                    <input formControlName="editorial" matInput placeholder="EDITORIAL" required readonly="entity.readOnly">
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('precioCosto') }}
+                        {{ getErrorMessage('editorial') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -58,11 +58,60 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
                 <mat-form-field>
                     <mat-label>
-                        PRECIO VENTA
+                        ISBN
                     </mat-label>
-                    <input formControlName="precioVenta" matInput placeholder="PRECIO VENTA">
+                    <input formControlName="isbn" matInput placeholder="ISBN" readonly="entity.readOnly">
                     <mat-error *ngIf="entityForm.invalid">
-                        {{ getErrorMessage('precioVenta') }}
+                        {{ getErrorMessage('isbn') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        MATERIA
+                    </mat-label>
+                    <input formControlName="materia" matInput placeholder="MATERIA" required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('materia') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        GRADO/CURSO
+                    </mat-label>
+                    <input formControlName="gradoCurso" matInput placeholder="GRADO/CURSO" required required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('gradoCurso') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        COSTO
+                    </mat-label>
+                    <input formControlName="costo" matInput placeholder="COSTO" required required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('costo') }}
+                    </mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-form-field>
+                    <mat-label>
+                        PRECIO
+                    </mat-label>
+                    <input formControlName="precio" matInput placeholder="PRECIO" required required readonly="entity.readOnly">
+                    <mat-error *ngIf="entityForm.invalid">
+                        {{ getErrorMessage('precio') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
@@ -72,13 +121,12 @@
                     <mat-label>
                         IVA
                     </mat-label>
-                    <input formControlName="iva" matInput placeholder="IVA" required>
+                    <input formControlName="iva" matInput placeholder="IVA" required required readonly="entity.readOnly">
                     <mat-error *ngIf="entityForm.invalid">
                         {{ getErrorMessage('iva') }}
                     </mat-error>
                 </mat-form-field>
             </mat-grid-tile>
-
 
             
            
@@ -86,15 +134,15 @@
         </mat-grid-list>
 
         <div class="buttons-container">
-            <button id="register" *ngIf="!params"  mat-raised-button color="primary" type="button" (click)="saveProducto()">
+            <button id="register" *ngIf="!params && !readOnlyDetalle"  mat-raised-button color="primary" type="button" (click)="saveProducto()" >
                 {{ viewText.REGISTER }}
                 <mat-icon>save</mat-icon>
             </button>
-            <button id="update" *ngIf="params"  mat-raised-button color="primary"  type="button" (click) ="updateProducto()">
+            <button id="update" *ngIf="params && !readOnlyDetalle"  mat-raised-button color="primary"  type="button" (click) ="updateProducto()" >
                 {{ viewText.UPDATE }}
                 <mat-icon>update</mat-icon>
             </button>
-            <button type="button" mat-raised-button (click)="closeForm()">
+            <button *ngIf = "!readOnlyDetalle" type="button" mat-raised-button (click)="closeForm()" >
                 {{ viewText.CANCEL }}
                 <mat-icon>clear</mat-icon>
             </button>

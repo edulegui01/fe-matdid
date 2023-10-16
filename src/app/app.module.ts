@@ -14,6 +14,9 @@ import { CustomDialogModule } from './components/custom-dialog/custom-dialog.mod
 import { ProveedorModule } from './proveedores/proveedor.module';
 import { ProductoModule } from './producto/producto.module';
 import { FuncionarioModule } from './funcionario/funcionario.module';
+import { LocalidadModule } from './localidad/localidad.module';
+import { PruebaComponent } from './prueba/prueba.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 
@@ -21,6 +24,7 @@ import { FuncionarioModule } from './funcionario/funcionario.module';
   declarations: [
     AppComponent,
     LoginComponent,
+    PruebaComponent,
 
   ],
   imports: [
@@ -36,7 +40,8 @@ import { FuncionarioModule } from './funcionario/funcionario.module';
     CustomDialogModule,
     ProveedorModule,
     ProductoModule,
-    FuncionarioModule
+    FuncionarioModule,
+    LocalidadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

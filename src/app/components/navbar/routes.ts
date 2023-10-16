@@ -99,6 +99,10 @@ export const MENU_URLS = {
             URL: 'editar-producto',
             PERMISO: 'MODIFICAR_HORARIO'
         },
+        DETALLE: {
+            URL: 'detalle-producto',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
         ELIMINAR: {
             URL: 'eliminar-producto',
             PERMISO: 'ELIMINAR_HORARIO'
@@ -126,5 +130,29 @@ export const MENU_URLS = {
             URL: 'eliminar-funcionario',
             PERMISO: 'ELIMINAR_HORARIO'
         },
-    }
+    },
+    LOCALIDAD: {
+        URL_BASE: 'localidad',
+        ROOT: {
+            URL: 'listar-localidad',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        LISTAR: {
+            URL: 'listar-localidad',
+            PERMISO: 'LISTAR_HORARIO'
+        },
+        NUEVO: {
+            URL: 'nuevo-localidad',
+            PERMISO: 'REGISTRAR_HORARIO'
+        },
+        EDITAR: {
+            URL: 'editar-localidad',
+            PERMISO: 'MODIFICAR_HORARIO'
+        },
+        ELIMINAR: {
+            URL: 'eliminar-localidad',
+            PERMISO: 'ELIMINAR_HORARIO'
+        },
+    },
+    
 };

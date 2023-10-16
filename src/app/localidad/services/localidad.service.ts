@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, observable, throwError } from 'rxjs';
-import { ClienteData } from 'src/app/class/clienteData';
 import { Producto } from 'src/app/class/producto';
 import { ProductoData } from 'src/app/class/productoData';
 import {Settings} from 'src/app/class/settings';
@@ -10,26 +9,25 @@ import {Settings} from 'src/app/class/settings';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductoService {
+export class LocalidadService {
 
   httpUrls={
-    urlListar:'/producto/listar',
-    urlGuarda:'/producto/guardar',
-    urlBuscarId:'/producto/buscar/',
-    urlModificar:'/producto/actualizar/',
-    urlBuscarDocu:'/producto/buscar-docu',
+    urlListar:'/localidad/listar',
+    urlGuarda:'/localidad/guardar',
+    urlBuscarId:'/localidad/buscar/',
+    urlModificar:'/localidad/actualizar/',
+    urlBuscarDocu:'/localidad/buscar-docu',
     urlLocalidadListar:'/localidad/listar',
-    urlActualiazr:'/producto/actualizar/',
-    urlEliminar:'/producto/borrar/'
+    urlActualiazr:'/localidad/actualizar/',
+    urlEliminar:'/localidad/borrar/'
   }
 
   editForm:boolean=false;
-  detalleForm:boolean=false;
 
   constructor(private http: HttpClient) { }
 
 
-  public getProductos(page:any='0',size:any='10',nombre:string=''): Observable<any>{
+  public getLocalidades(page:any='0',size:any='10',nombre:string=''): Observable<any>{
     
     let params = new HttpParams();
 
@@ -39,14 +37,14 @@ export class ProductoService {
     
 
 
-    return this.http.get<any>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
-      map((productoData:any) => productoData)
+    return this.http.get<ProductoData>(Settings.URL_BASE+this.httpUrls.urlListar,{params}).pipe(
+      map((productoData:ProductoData) => productoData)
     )
 
   }
 
-  public saveProducto(producto:Producto):Observable<any>{
-    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,producto);
+  public saveLocalidad(localidad:any):Observable<any>{
+    return this.http.post(Settings.URL_BASE+this.httpUrls.urlGuarda,localidad);
   }
 
 

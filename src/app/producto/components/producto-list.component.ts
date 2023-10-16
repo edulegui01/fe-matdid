@@ -1,14 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Version, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
-import { MENU_URLS } from 'src/app/components/navbar/routes';
-import { Cliente } from 'src/app/class/cliente';
 import { NavigationExtras, Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ClienteData } from 'src/app/class/clienteData';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {MatPaginatorIntl} from '@angular/material/paginator';
-import { ThisReceiver } from '@angular/compiler';
 import { PaginatorEs } from 'src/app/utils/paginatorEs';
 import { MatDialog } from '@angular/material/dialog';
 import { Settings } from 'src/app/class/settings';
@@ -19,7 +15,8 @@ import { ProductoData } from 'src/app/class/productoData';
 @Component({
   selector: 'app-producto-list',
   templateUrl: '../templates/producto-list.component.html',
-  styleUrls: ['../styles/producto-list.component.scss']
+  styleUrls: ['../styles/producto-list.component.scss'],
+  
 })
 export class ProductoListComponent  implements OnInit {
   

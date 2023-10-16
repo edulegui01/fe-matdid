@@ -47,7 +47,7 @@
   
   // remueve el foco del boton luego de pulsarlo
   .mat-button-focus-overlay {
-    // background-color: transparent !important;
+    //background-color: transparent !important;
   }
   
   .menu-link {
@@ -58,21 +58,35 @@
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
   }
+
+ 
   
   .route-link {
     color: black;
   }
+
+  .route-link:link {
+    background-color: aqua;
+    color: #3f51b5;
+    font-size: 0.9rem;
+  }
+
+
+ 
+
+
+
   
-  .active,
+  //.active,
   .route-link:hover {
     color: #3f51b5;
     font-size: 0.9rem;
   }
 
-  .route-link:link {
-    color: #3f51b5;
-    font-size: 0.9rem;
-  }
+ 
+ 
+
+
   
   // item activo
   .active span {

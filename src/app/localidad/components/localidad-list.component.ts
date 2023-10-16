@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { GlobalMessage } from 'src/app/class/global-message';
 import { MENU_URLS } from 'src/app/components/navbar/routes';
-import { ClientesService } from '../services/clientes.service';
 import { Cliente } from 'src/app/class/cliente';
 import { NavigationExtras, Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -14,15 +13,17 @@ import { PaginatorEs } from 'src/app/utils/paginatorEs';
 import { MatDialog } from '@angular/material/dialog';
 import { Settings } from 'src/app/class/settings';
 import { CustomDialogComponent } from 'src/app/components/custom-dialog/components/custom-dialog.component';
+import { ProductoData } from 'src/app/class/productoData';
+import { LocalidadService } from '../services/localidad.service';
 
 @Component({
-  selector: 'app-cliente-list',
-  templateUrl: '../templates/cliente-list.component.html',
-  styleUrls: ['../styles/cliente-list.component.scss']
+  selector: 'app-localidad-list',
+  templateUrl: '../templates/localidad-list.component.html',
+  styleUrls: ['../styles/localidad-list.component.scss']
 })
-export class ClienteListComponent  implements OnInit {
+export class LocalidadListComponent  implements OnInit {
   
-  dataSource!:ClienteData;
+  dataSource!:any;
   clienteToEdit!:any;
   routerInstant!:Router;
   paginatorRange = GlobalMessage.PAGINATOR_RANGE;
@@ -38,7 +39,7 @@ export class ClienteListComponent  implements OnInit {
   
   
 
-  constructor(private clienteService:ClientesService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {
+  constructor(private localidadService:LocalidadService, private paginator: MatPaginatorIntl, private fb:FormBuilder, private routerInstance: Router, private dialogInstance: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -46,8 +47,8 @@ export class ClienteListComponent  implements OnInit {
     this.ChangePaginatorEspa();
     
     this.filterForm = this.fb.group({
-      name: [''],
-      cedula: ['']
+      nombre: [''],
+      
     })
   }
 
@@ -59,7 +60,7 @@ export class ClienteListComponent  implements OnInit {
 
 
   initDataSource(){
-    this.clienteService.getClientes().subscribe( (clienteData:ClienteData) => this.dataSource = clienteData)
+    this.localidadService.getLocalidades().subscribe( (localidadData:any) => this.dataSource = localidadData)
   }
 
 
@@ -67,32 +68,31 @@ export class ClienteListComponent  implements OnInit {
     let page = event.pageIndex;
     let size = event.pageSize;
 
-    let cedula:string='';
-    let name:string='';
+    let nombre:string='';
+    
 
     if (this.filterForm.value.cedula || this.filterForm.value.name){
-      cedula = this.filterForm.value.cedula;
-      name = this.filterForm.value.name;
+      nombre = this.filterForm.value.nombre;
+      
 
     }
 
 
-    this.clienteService.getClientes(page,size,cedula,name).subscribe((clienteData:ClienteData) => this.dataSource = clienteData);
+    this.localidadService.getLocalidades(page,size,nombre).subscribe((localidadData:any) => this.dataSource = localidadData);
   }
 
 
   doFilter(){
     
-    let cedula = this.filterForm.value.cedula;
-    let name = this.filterForm.value.name;
+   
+    let nombre = this.filterForm.value.nombre;
 
-    console.log(cedula);
     
-    this.clienteService.getClientes('0','10',cedula,name).subscribe((clienteData:ClienteData) => this.dataSource = clienteData);
+    this.localidadService.getLocalidades('0','10',nombre).subscribe((localidadData:any) => this.dataSource = localidadData);
   }
 
 
-  OnClickDeleteCliente(element:any){
+  OnClickDeleteProducto(element:any){
     
     this.dialogInstance.open(CustomDialogComponent, {
                   width: Settings.DIALOG_MEDIUM,
@@ -111,9 +111,9 @@ export class ClienteListComponent  implements OnInit {
                     this.paginatorf.pageIndex = 0;
 
 
-                      this.clienteService.deleteCliente(element.idPersona).subscribe(resp => {
+                      this.localidadService.deleteProducto(element.idProducto).subscribe(resp => {
                         this.paginatorf.pageIndex = 0;
-                        this.clienteService.getClientes().subscribe( (clienteData:ClienteData) => this.dataSource = clienteData)
+                        this.localidadService.getLocalidades().subscribe( (localidadData:any) => this.dataSource = localidadData)
                       });
                   }
               });
@@ -125,9 +125,9 @@ export class ClienteListComponent  implements OnInit {
     const extraParams: NavigationExtras = {
        state: element,
     };
-    this.clienteService.editForm=true;
+    this.localidadService.editForm=true;
     console.log(element);
-    this.routerInstance.navigate(['cliente/editar-cliente'],extraParams);
+    this.routerInstance.navigate(['localidad/editar-localidad'],extraParams);
     
     
 
@@ -144,8 +144,8 @@ export class ClienteListComponent  implements OnInit {
 
   
 
-  displayedColumns: string[] = ['nombre', 'cedula', 'ruc', 'direccion', 'options'];
-  displayedFilters: string[] = ['cedula-filter', 'name-filter'];
+  displayedColumns: string[] = ['nombre', 'options'];
+  displayedFilters: string[] = ['nombre-filter'];
   
 }
 

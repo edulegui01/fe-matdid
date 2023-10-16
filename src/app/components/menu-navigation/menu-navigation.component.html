@@ -5,7 +5,7 @@
 
         <!-- Profundidad 1 menu-solid-->
         <div class="" *ngIf="menu.menus.length === 0">
-            <a mat-list-item #link (click)="!preview ? goRoute(menu, link) : null" class="menu-link no-child route-link">
+            <a mat-list-item #link (click)="!preview ? goRoute(menu, link) : null" class="menu-link no-child route-link ">
                 <mat-icon>{{ menu.icono ? menu.icono : 'adjust' }}</mat-icon>
                 <span>{{ menu.nombre }} </span>
             </a>

@@ -11,6 +11,9 @@
     <a mat-tab-link routerLink="editar-producto" *ngIf="productoService.editForm" routerLinkActive #rl3="routerLinkActive" [active]="rl3.isActive">
       MODIFICAR PRODUCTO
     </a>
+    <a mat-tab-link routerLink="detalle-producto" *ngIf="productoService.detalleForm" routerLinkActive #rl4="routerLinkActive" [active]="rl4.isActive">
+      DETALLE PRODUCTO
+    </a>
 
 
 

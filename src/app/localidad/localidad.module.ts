@@ -4,11 +4,12 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavigationModule } from '../components/navigation.module';
-import { ProductoFormComponent } from './components/producto-form.component';
-import { ProductoListComponent } from './components/producto-list.component';
-import { ProductoComponent } from './components/producto.component';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { ProductoListCardComponent } from './components/producto-list-card.component';
+import { LocalidadComponent } from './components/localidad.component';
+import { LocalidadFormComponent } from './components/localidad-form.component';
+import { LocalidadListComponent } from './components/localidad-list.component';
+
+
+
 
 
 
@@ -18,10 +19,9 @@ import { ProductoListCardComponent } from './components/producto-list-card.compo
 
 @NgModule({
   declarations: [
-    ProductoFormComponent,
-    ProductoListComponent,
-    ProductoComponent,
-    ProductoListCardComponent
+    LocalidadComponent,
+    LocalidadFormComponent,
+    LocalidadListComponent
    
   ],
   imports: [
@@ -32,6 +32,8 @@ import { ProductoListCardComponent } from './components/producto-list-card.compo
     ReactiveFormsModule,
     NavigationModule,
     
+    
+    
   ]
 })
-export class ProductoModule { }
+export class LocalidadModule { }
